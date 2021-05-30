@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    body{
+       
+      background-image: linear-gradient(90deg,rgb(66, 11, 54), rgb(179, 59, 153));
+      font-family: sans-serif;
+        }
+      
+      #heading{
+        height: 100px;
+        width: 500px;
+       top: 100px;
+       left: 400px;
+       font-weight: 100;
+        color: #fff;
+        margin-left: 300px ;
+        width: fit-content;
+        text-align: center;
+      }
+      #frm{
+        height: 100px;
+        width: 50%;
+        bottom: 40;
+        margin-left: 300px ;
+        margin-top: 100px;
+        
+      }
+      .btn{
+        border-radius: 40px;
+        border-color: rgba(73, 6, 73, 0.397);
+        border-style: solid;
+        border-width: 4px;
+        width: 100px;
+        height: 40px;
+      }
+      .email{
+        border-radius: 40px;
+        border-color: rgba(73, 6, 73, 0.397);
+        border-style: solid;
+        width: 400px;
+        height: 40px;
+        border-width: 4px;
+       }
+      #clockdiv{
+        height: 100px;
+        width: 50%;
+        top: 170px;
+        width: fit-content;
+        margin-left: 350px;
+        padding: 40px;
+        left: 40px;
+        font-family: sans-serif;
+        font-weight: 100;
+        text-align: center;
+        font-size: 30px;
+        border-spacing: 2px;
+        border-style: double;
+        border-color: cornsilk;
+        border-width: 4px;
+        border-radius: 4px;
+        
+      }
+      .content {
+  position: fixed;
+  height: 600px;
+  background: rgba(255, 178, 91, 0.267); 
+  color: cornsilk;
+  top: 0;
+  right: 0;
+  width: 20%;
+  padding: 20px;
+}
+      
+      #clockdiv > div{
+        
+        border-radius: 3px;
+        background: #eedc79;
+        display: inline-block;
+      }
+      
+      #clockdiv div > span{
+        padding: 15px;
+        border-radius: 3px;
+        background: #dab903f5;
+        display: inline-block;
+        color: #fff;
+      }
+      
+      .smalltext{
+        padding-top: 5px;
+        font-size: 16px;
+        color: black;
+      }
+    </style>
+    <div id="heading">
+        <h1>Coming Soon</h1>
+        <h2>Our new website is under construction.</h2>
+    </div>
+
+     <div class="content">
+    <h1><u>About our website</u></h1>
+    <p>Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei.</p>
+  </div>
+      
+<div id="clockdiv">
+  <div>
+    <span class="days"></span>
+    <div class="smalltext">Days</div>
+  </div>
+  <div>
+    <span class="hours"></span>
+    <div class="smalltext">Hours</div>
+  </div>
+  <div>
+    <span class="minutes"></span>
+    <div class="smalltext">Minutes</div>
+  </div>
+  <div>
+    <span class="seconds"></span>
+    <div class="smalltext">Seconds</div>
+  </div>
+</div>
+<div id="frm">
+<form >
+  <input type="email" class="email" value="Enter your email">
+  <button class="btn" class="button" id="button-addon2">Notify Me</button>
+</form>
+</div>
+<script>
+    function getTimeRemaining(endtime)
+     {
+  const total = Date.parse(endtime) - Date.parse(new Date());
+  const seconds = Math.floor((total / 1000) % 60);
+  const minutes = Math.floor((total / 1000 / 60) % 60);
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+  
+  return {
+    total,
+    days,
+    hours,
+    minutes,
+    seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  const clock = document.getElementById(id);
+  const daysSpan = clock.querySelector('.days');
+  const hoursSpan = clock.querySelector('.hours');
+  const minutesSpan = clock.querySelector('.minutes');
+  const secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    const t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  const timeinterval = setInterval(updateClock, 1000);
+}
+
+const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+initializeClock('clockdiv', deadline);
+
+</script>
+</body>
+</html>
